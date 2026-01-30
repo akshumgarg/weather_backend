@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: weather-backend
+    runtime: python
+    plan: free
+    region: singapore
+    branch: main
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn weather_backend.wsgi:application"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: DEBUG
+        value: False
+      - key: WEATHER_API_KEY
+        sync: false
+    autoDeploy: true
